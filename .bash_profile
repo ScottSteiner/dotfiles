@@ -8,10 +8,15 @@
 
 # include bashrc if it exists
 if [ -f ~/.bash/bashrc ]; then
-    . ~/.bash/bashrc
+	. ~/.bash/bashrc
 fi
 
 # set PATH so it includes user's private bin if it exists
 if [ -d ~/.bin ] ; then
-    PATH=/sbin:~/.bin:"${PATH}"
+	PATH=/sbin:~/.bin:"${PATH}"
+fi
+
+# set COWPATH so it includes user's private bin if it exists
+if [ -d ~/.cows ] ; then
+	export COWPATH=~/.cows:/usr/share/cowsay/cows/
 fi
