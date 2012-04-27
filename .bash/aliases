@@ -52,15 +52,15 @@ function showa { grep -i $1 ~/.bash/aliases; }
 alias un='tar xvfz'
 
 #Package Management
-sapt='sudo aptitude'
+alias apt='sudo aptitude'
 alias acs='aptitude search'
-alias agc='$sapt clean'
-alias agf='$sapt full-upgrade'
-alias agg='$sapt safe-upgrade'
-alias agi='$sapt install'
-alias agr='$sapt remove'
-alias agp='$sapt purge'
-alias agu='$sapt update'
+alias agc='apt clean'
+alias agf='apt full-upgrade'
+alias agg='apt safe-upgrade'
+alias agi='apt install'
+alias agr='apt remove'
+alias agp='apt purge'
+alias agu='apt update'
 alias dpkgsize='dpkg-query -W --showformat="\${Installed-Size;10}\t\${Package}\n"|sort -k1,1n'
 function listdeinstall { dpkg -l|awk '/^rc/ {print $2}'; }
 function purgedeinstall { dpkg -l|awk '/^rc/ {print $2}'|sudo xargs dpkg -P; }
