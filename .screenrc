@@ -1,0 +1,6 @@
+shell -bash
+
+# Allows bold colors
+attrcolor b ".I" 
+# Tells screen hot o set colors. AB = Background, AF = Foreground
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'

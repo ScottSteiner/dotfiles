@@ -1,0 +1,4 @@
+xterm*background:#000000
+xterm*foreground:#FFFFFF
+xterm*faceSize:14
+xterm*faceName:Bitstream Vera Serif Mono
