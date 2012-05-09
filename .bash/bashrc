@@ -3,19 +3,19 @@
 # bash_history settings: size and no duplicates and no lines w/ lead spaces
 export HISTCONTROL="ignoreboth"
 export HISTSIZE=128
-export HISTFILE="~/.bash/history"
+export HISTFILE="~/.config/bash/history"
 
 # aliases ##################################################
-if [ -f ~/.bash/aliases ]; then
-	. ~/.bash/aliases
+if [ -f ~/.config/bash/aliases ]; then
+	. ~/.config/bash/aliases
 fi
 
 # Color prompt #############################################
-if [ -f ~/.bash/colors ]; then
-	. ~/.bash/colors
+if [ -f ~/.config/bash/colors ]; then
+	. ~/.config/bash/colors
 fi
-if [ -f ~/.bash/prompt ]; then
-	. ~/.bash/prompt
+if [ -f ~/.config/bash/prompt ]; then
+	. ~/.config/bash/prompt
 fi
 
 ############################################################

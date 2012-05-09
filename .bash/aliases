@@ -31,7 +31,7 @@ alias ...='cd ../..'
 function irssicfg { irssi --config=~/.irssi/config.${1}; }
 
 #Misc Stuff
-alias clear='history -c; rm -f ~/.bash/history; clear'
+alias clear='history -c; rm -f ~/.config/bash/history; clear'
 
 alias df='df -lhx devtmpfs -x tmpfs -x rootfs'
 function findlarge { sudo find $1 -type d \( -path "/proc" -o -path "/home/samba" -o -path "/sys" \) -prune -o -size +${2}k -printf "%s\t%p\n"|sort -n|awk 'BEGIN { FS="\t" } ; { print int($1/1048576)"MB:\t"$2 }';}
@@ -48,7 +48,7 @@ alias to='pushd'
 
 alias ntpoffset='ntpdc -c loopinfo'
 
-function showa { grep -i $1 ~/.bash/aliases; }
+function showa { grep -i $1 ~/.config/bash/aliases; }
 
 alias un='tar xvfz'
 
