@@ -23,6 +23,7 @@ alias lla='la -lX'
 alias ldir='la -l|grep ^d'
 alias lfiles='la -l|grep ^-'
 alias ls='ls -Fh --color=auto --time-style="+%Y-%m-%d %T%:::z"'
+alias lss='ls -lrt|grep $1' #Search ls output
 
 alias ..="cd .."
 alias ...='cd ../..'
@@ -38,15 +39,15 @@ function findlarge { sudo find $1 -type d \( -path "/proc" -o -path "/home/samba
 alias fl='findlarge / 10240'
 alias fldir='findlarge . 10240'
 
-alias lss='ls -lrt|grep $1' #Search ls output
 
-alias man='TERMINFO=~/.terminfo TERM=mostlike LESS=C PAGER=less man' #Color manpages. Compile http://nion.modprobe.de/mostlike.txt with tic (the terminfo entry-description compiler)
+alias man='TERMINFO=~/.config/terminfo TERM=mostlike LESS=C PAGER=less man' #Color manpages. Compile http://nion.modprobe.de/mostlike.txt with tic (the terminfo entry-description compiler)
 alias pss='ps -ef|grep -v grep|grep -i $1' #Search ps output
 
 alias ot='popd'
 alias to='pushd'
 
 alias ntpoffset='ntpdc -c loopinfo'
+alias screen='screen -c ~/.config/screenrc'
 
 function showa { grep -i $1 ~/.config/bash/aliases; }
 
