@@ -1,0 +1,69 @@
+#!/bin/bash
+# Copyright (c) 2009-2012 Scott Steiner <nothingfinerthanscottsteiner@gmail.com>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+#File Management
+eval `dircolors -b`
+alias l='ls'
+alias la='ls -A'
+alias ll='ls -lX'
+alias lla='la -lX'
+alias ldir='la -l|grep ^d'
+alias lfiles='la -l|grep ^-'
+alias ls='ls -Fh --color=auto --time-style="+%Y-%m-%d %T%:::z"'
+alias lss='ls -lrt|grep $1' #Search ls output
+
+alias ..="cd .."
+alias ...='cd ../..'
+
+#IRC
+function irssicfg { irssi --config=~/.irssi/config.${1}; }
+
+#Misc Stuff
+alias clear='history -c; rm -f ~/.config/bash/history; clear'
+
+alias df='df -lhx devtmpfs -x tmpfs -x rootfs'
+function findlarge { sudo find $1 -type d \( -path "/proc" -o -path "/home/samba" -o -path "/sys" \) -prune -o -size +${2}k -printf "%s\t%p\n"|sort -n|awk 'BEGIN { FS="\t" } ; { print int($1/1048576)"MB:\t"$2 }';}
+alias fl='findlarge / 10240'
+alias fldir='findlarge . 10240'
+
+
+alias man='TERMINFO=~/.config/terminfo TERM=mostlike LESS=C PAGER=less man' #Color manpages. Compile http://nion.modprobe.de/mostlike.txt with tic (the terminfo entry-description compiler)
+alias pss='ps -ef|grep -v grep|grep -i $1' #Search ps output
+
+alias ot='popd'
+alias to='pushd'
+
+alias ntpoffset='ntpdc -c loopinfo'
+alias screen='screen -c ~/.config/screenrc'
+
+function showa { grep -i $1 ~/.config/bash/aliases; }
+
+alias un='tar xvfz'
+
+#Package Management
+alias apt='sudo aptitude'
+alias acs='aptitude search'
+alias agc='apt clean'
+alias agf='apt full-upgrade'
+alias agg='apt safe-upgrade'
+alias agi='apt install'
+alias agr='apt remove'
+alias agp='apt purge'
+alias agu='apt update'
+alias dpkgsize='dpkg-query -W --showformat="\${Installed-Size;10}\t\${Package}\n"|sort -k1,1n'
+function listdeinstall { dpkg -l|awk '/^rc/ {print $2}'; }
+function purgedeinstall { dpkg -l|awk '/^rc/ {print $2}'|sudo xargs dpkg -P; }
+function wiki { dig +short txt $1.wp.dg.cx; }

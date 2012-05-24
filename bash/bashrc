@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# bash_history settings: size and no duplicates and no lines w/ lead spaces
+export HISTCONTROL="ignoreboth"
+export HISTSIZE=128
+export HISTFILE="~/.config/bash/history"
+
+# aliases ##################################################
+if [ -f ~/.config/bash/aliases ]; then
+	. ~/.config/bash/aliases
+fi
+
+# Color prompt #############################################
+if [ -f ~/.config/bash/colors ]; then
+	. ~/.config/bash/colors
+fi
+if [ -f ~/.config/bash/prompt ]; then
+	. ~/.config/bash/prompt
+fi
+
+############################################################
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc).
+if [ -f /etc/bash_completion ]; then
+	. /etc/bash_completion
+fi
