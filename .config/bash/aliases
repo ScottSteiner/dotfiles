@@ -15,8 +15,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #File Management
-alias grep='grep --color=tty -d recurse'
-alias egrep='egrep --color=tty -d recurse'
+alias grep='grep --color=tty'
+alias egrep='egrep --color=tty'
 eval `dircolors -b`
 alias l='ls'
 alias la='ls -A'
@@ -69,3 +69,20 @@ alias dpkgsize='dpkg-query -W --showformat="\${Installed-Size;10}\t\${Package}\n
 function listdeinstall { dpkg -l|awk '/^rc/ {print $2}'; }
 function purgedeinstall { dpkg -l|awk '/^rc/ {print $2}'|sudo xargs dpkg -P; }
 function wiki { dig +short txt $1.wp.dg.cx; }
+extract () {
+	if [ -f $1 ] ; then
+		case $1 in
+			*.tar.bz2 | *.tbz2)	tar xjf $1;;
+			*.tar.gz | *.tgz)	tar xzf $1;;
+			*.bz2)			bunzip2 $1;;
+			*.gz)			gunzip $1;;
+			*.rar)			rar x $1;;
+			*.tar)			tar xf $1;;
+			*.zip)			unzip $1;;
+			*.Z)			uncompress $1;;
+			*)			echo "'$1' cannot be extracted via extract()";;
+		esac
+	else
+		echo "'$1' is not a valid file"
+	fi
+}
