@@ -30,17 +30,20 @@ alias lss='ls -lrt|grep $1' #Search ls output
 alias ..="cd .."
 alias ...='cd ../..'
 
+alias df='df -lhx devtmpfs -x tmpfs -x rootfs'
+function findlarge { sudo find $1 -type d \( -path "/proc" -o -path "/home/samba" -o -path "/sys" \) -prune -o -size +${2}k -printf "%s\t%p\n"|sort -n|awk 'BEGIN { FS="\t" } ; { print int($1/1048576)"MB:\t"$2 }';}
+alias fl='findlarge / 10240'
+alias fldir='findlarge . 10240'
+
+function mkcd(){ mkdir "$1";cd "$1"; }
+
 #IRC
 function irssicfg { irssi --config=~/.irssi/config.${1}; }
 
 #Misc Stuff
 alias clear='history -c; rm -f ~/.config/bash/history; clear'
 
-alias df='df -lhx devtmpfs -x tmpfs -x rootfs'
-function findlarge { sudo find $1 -type d \( -path "/proc" -o -path "/home/samba" -o -path "/sys" \) -prune -o -size +${2}k -printf "%s\t%p\n"|sort -n|awk 'BEGIN { FS="\t" } ; { print int($1/1048576)"MB:\t"$2 }';}
-alias fl='findlarge / 10240'
-alias fldir='findlarge . 10240'
-
+alias myip="curl ifconfig.me"
 
 alias man='TERMINFO=~/.config/terminfo TERM=mostlike LESS=C PAGER=less man' #Color manpages. Compile http://nion.modprobe.de/mostlike.txt with tic (the terminfo entry-description compiler)
 alias pss='ps -ef|grep -v grep|grep -i $1' #Search ps output
@@ -51,9 +54,26 @@ alias to='pushd'
 alias ntpoffset='ntpdc -c loopinfo'
 alias screen='screen -c ~/.config/screenrc'
 
-function showa { grep -i $1 ~/.config/bash/aliases; }
+function showa { grep -i "$1" ~/.config/bash/aliases; }
 
-alias un='tar xvfz'
+function wiki { dig +short txt "$1".wp.dg.cx; }
+
+extract () {
+	if [ -f "$1" ] ; then
+		case "$1" in
+			*.tar.bz2 | *.tbz2 | *.tar.gz | *.tgz | *.tar)	tar xvf "$1";;
+			*.bz2)			bunzip2 "$1";;
+			*.gz)			gunzip "$1";;
+			*.rar)			rar x "$1";;
+			*.zip)			unzip "$1";;
+			*.Z)			uncompress "$1";;
+			*)			echo "'$1' cannot be extracted via extract()";;
+		esac
+	else
+		echo "'$1' is not a valid file"
+	fi
+}
+alias x='extract'
 
 #Package Management
 alias apt='sudo aptitude'
@@ -68,21 +88,3 @@ alias agu='apt update'
 alias dpkgsize='dpkg-query -W --showformat="\${Installed-Size;10}\t\${Package}\n"|sort -k1,1n'
 function listdeinstall { dpkg -l|awk '/^rc/ {print $2}'; }
 function purgedeinstall { dpkg -l|awk '/^rc/ {print $2}'|sudo xargs dpkg -P; }
-function wiki { dig +short txt $1.wp.dg.cx; }
-extract () {
-	if [ -f $1 ] ; then
-		case $1 in
-			*.tar.bz2 | *.tbz2)	tar xjf $1;;
-			*.tar.gz | *.tgz)	tar xzf $1;;
-			*.bz2)			bunzip2 $1;;
-			*.gz)			gunzip $1;;
-			*.rar)			rar x $1;;
-			*.tar)			tar xf $1;;
-			*.zip)			unzip $1;;
-			*.Z)			uncompress $1;;
-			*)			echo "'$1' cannot be extracted via extract()";;
-		esac
-	else
-		echo "'$1' is not a valid file"
-	fi
-}
