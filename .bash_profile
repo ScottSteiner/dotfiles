@@ -17,6 +17,6 @@ if [ -d ~/.bin ] ; then
 fi
 
 # set COWPATH so it includes user's private cows if it exists
-if [ -d ~/Documents/.cows ] ; then
-	export COWPATH=~/Documents/.cows:/usr/share/cowsay/cows/
+if [ -d ~/.config/cows ] ; then
+	export COWPATH=~/.config/cows:/usr/share/cowsay/cows/
 fi
