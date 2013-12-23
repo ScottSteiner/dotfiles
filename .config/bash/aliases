@@ -54,10 +54,11 @@ alias to='pushd'
 alias ntpoffset='ntpdc -c loopinfo'
 alias screen='screen -c ~/.config/screenrc'
 
+alias grid='caps -l 5 -n 25 --border 0 --noshadow --noheader --spacing 0 --no-timestamps '
+
 function showa { grep -i "$1" ~/.config/bash/aliases; }
-
 function wiki { dig +short txt "$1".wp.dg.cx; }
-
+alias youtube='cclive'
 extract () {
 	if [ -f "$1" ] ; then
 		case "$1" in
