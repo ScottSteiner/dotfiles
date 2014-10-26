@@ -57,7 +57,33 @@ alias screen='screen -c ~/.config/screenrc'
 alias grid='caps -l 5 -n 25 --border 0 --noshadow --noheader --spacing 0 --no-timestamps '
 
 function showa { grep -i "$1" ~/.config/bash/aliases; }
-function wiki { dig +short txt "$1".wp.dg.cx; }
+function wiki { dig +short txt "$*".wp.dg.cx; }
+function randomcap {
+	if ! [ -z $1 ] ; then
+		if [[ $1 =~ ^[0-9]+$ ]] ; then
+			seconds=$1;
+		else
+			seconds=$(echo $1 | awk -F: '{
+				if ($(NF-2) ~ /^[0-9]+$/) print ($(NF-2) * 3600) + ($(NF-1) * 60) + $NF;
+				else print ($(NF-1) * 60) + $NF;
+			}')
+		fi
+		filename="$(echo $1 | sed s/:/./g)"
+	else
+		seconds=1320
+		filename="22.00"
+	fi
+	if ! [ -z "$2" ]; then
+		directory="$2"
+	else
+		directory=~/media/Movies
+	fi
+	filename="$filename $(date +%Y%m%d\ %H.%M.%S)"
+	file=$(find "$directory" -regex ".*\(avi\|mkv\|mp4|wmv|\)$" | shuf -n 1)
+	echo "$file"
+	caps "$file" --offset $seconds -end $seconds --backoffset 0 --number 1 --noheader --border 0 --spacing 0 --noshadow -r 960x540 --filename "$filename" -fontsize 72 
+#--no-timestamps
+}
 alias youtube='cclive'
 extract () {
 	if [ -f "$1" ] ; then
@@ -89,3 +115,5 @@ alias agu='apt update'
 alias dpkgsize='dpkg-query -W --showformat="\${Installed-Size;10}\t\${Package}\n"|sort -k1,1n'
 function listdeinstall { dpkg -l|awk '/^rc/ {print $2}'; }
 function purgedeinstall { dpkg -l|awk '/^rc/ {print $2}'|sudo xargs dpkg -P; }
+
+alias loop='ffmpeg -loop 1 -t 10 -i'
