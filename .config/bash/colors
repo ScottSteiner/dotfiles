@@ -49,3 +49,27 @@ coldblue='\[\e[0;38;5;33m\]' # Ice Blue
 #export iceblue="\[\033[0;38;5;45m\]"
 #export turqoise="\[\033[0;38;5;50m\]"
 #export smoothgreen="\[\033[0;38;5;42m\]"
+
+NORMAL=$(tput sgr0) # Reset text format to the terminal's default
+# -------------------------------
+BOLD=$(tput bold)
+DIM=$(tput dim)
+UNDERLINE=$(tput smul)
+BLINK=$(tput blink)
+REVERSE=$(tput smso)
+# -------------------------------
+BLACK=$(tput setaf 0)
+RED=$(tput setaf 1)
+GREEN=$(tput setaf 2)
+YELLOW=$(tput setaf 3)
+BLUE=$(tput setaf 4)
+MAGENTA=$(tput setaf 5)
+CYAN=$(tput setaf 6)
+WHITE=$(tput setaf 7)
+GREY=$(tput setaf 8)
+# -------------------------------
+BETTER_YELLOW=$(tput setaf 220)
+LIME_YELLOW=$(tput setaf 190)
+POWDER_BLUE=$(tput setaf 153)
+ORANGE=$(tput setaf 172)
+PURPLE=$(tput setaf 141)
